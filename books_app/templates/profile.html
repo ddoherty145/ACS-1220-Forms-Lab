@@ -18,4 +18,19 @@
     {% endif %}
 </p>
 
+<form method="POST" action="{{ url_for('main.profile', username=user.username) }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Edit profile</legend>
+
+        {{ form.username.label }}
+        {{ form.username }}
+        
+        {{ form.favorite_books.label }}
+        {{ form.favorite_books }}
+            
+        {{ form.submit }}
+    </fieldset>
+</form>
+
 {% endblock %}

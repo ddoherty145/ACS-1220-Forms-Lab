@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, DateField, SelectField, SubmitField, TextAreaField
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import DataRequired, Length, ValidationError
 from books_app.models import Audience, Book, Author, Genre
 
@@ -39,9 +39,21 @@ class AuthorForm(FlaskForm):
 
 class GenreForm(FlaskForm):
     """Form to create a genre."""
-    name = StringField('Denre Name',
+    name = StringField('Genre Name',
         validators=[
             DataRequired(),
             Length(min=3, max=80, message="Genre name must be between 3 and 80 characters")
         ])
+    submit = SubmitField('Submit')
+
+
+class UserForm(FlaskForm):
+    """Form to create a user."""
+    username = StringField('Username',
+        validators=[
+            DataRequired(),
+            Length(min=3, max=80, message="Username must be between 3 and 80 characters")
+        ])
+    favorite_books = QuerySelectMultipleField('Favortie Books',
+        query_factory=lambda: Book.query)
     submit = SubmitField('Submit')

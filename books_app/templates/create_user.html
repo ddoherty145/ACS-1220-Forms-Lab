@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Create User</h1>
+
+<form method="POST" action="{{ url_for('main.create_user') }}">
+    {{ form.csrf_token }}
+    <fieldset>
+        <legend>Create a new user</legend>
+
+        {{ form.username.label }}
+        {{ form.username }}
+        <!-- Show form errors -->
+        <ul>
+        {% for error in form.username.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+        
+        {{ form.favorite_books.label }}
+        {{ form.favorite_books }}
+        <!-- Show form errors -->
+        <ul>
+        {% for error in form.favorite_books.errors %}
+            <li class="error">{{ error }}</li>
+        {% endfor %}
+        </ul>
+            
+        {{ form.submit }}
+    </fieldset>
+</form>
+
+{% endblock %}
